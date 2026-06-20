@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paolo Piria — Portfolio 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f3;
+      --red: #e0190f;
+      --accent: #ee710b;
+      --purple: #764d9a;
+      --gray: #888;
+      --light-gray: #e8e8e4;
+      --section-pad: clamp(60px, 8vw, 120px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(238,113,11,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(118,77,154,0.06) 0%, transparent 50%);
+    }
+
+    .hero-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 14vw, 200px);
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+
+    .hero-title span { color: var(--red); }
+
+    .hero-sub {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-sub p {
+      font-size: 14px;
+      color: var(--gray);
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    .hero-contacts {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+      line-height: 1.9;
+    }
+
+    .hero-contacts a { color: var(--accent); text-decoration: none; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 40px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    /* ── WHO AM I ── */
+    .who {
+      padding: var(--section-pad) 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .who-img {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      filter: grayscale(100%);
+    }
+
+    .who-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .who-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 90px);
+      line-height: 1;
+      margin-bottom: 32px;
+    }
+
+    .who-text h2 span { color: var(--red); }
+
+    .who-text p {
+      font-size: 15px;
+      color: rgba(245,245,243,0.7);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* ── CONTENTS ── */
+    .contents {
+      padding: var(--section-pad) 40px;
+      background: var(--white);
+      color: var(--black);
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .contents h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 10vw, 140px);
+      line-height: 0.9;
+      margin-bottom: 60px;
+      letter-spacing: -0.01em;
+    }
+
+    .contents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .contents-item {
+      padding: 28px 0;
+      border-top: 2px solid var(--black);
+    }
+
+    .contents-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .contents-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      padding: 60px 40px 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 110px);
+      line-height: 1;
+      color: var(--red);
+    }
+
+    .section-slash {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 110px);
+      line-height: 1;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 8vw, 110px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PROJECT BLOCK ── */
+    .project {
+      padding: 0 40px 80px;
+    }
+
+    .project-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .project h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .project-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .project-two-col p, .project p {
+      font-size: 14px;
+      color: rgba(245,245,243,0.65);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .project-img {
+      width: 100%;
+      display: block;
+      margin-bottom: 40px;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .project-gallery {
+      display: grid;
+      gap: 4px;
+    }
+
+    .project-gallery.cols-2 { grid-template-columns: 1fr 1fr; }
+    .project-gallery.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .project-gallery.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .project-gallery.cols-1 { grid-template-columns: 1fr; }
+
+    .project-gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      align-self: start;
+    }
+
+    /* ── HIGHLIGHT BLOCK (dark bg) ── */
+    .highlight {
+      background: #111;
+      padding: var(--section-pad) 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .highlight h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .highlight-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .highlight p {
+      font-size: 14px;
+      color: rgba(245,245,243,0.6);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .highlight .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ── LAST THOUGHTS ── */
+    .last-thoughts {
+      padding: var(--section-pad) 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .last-thoughts h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 7vw, 90px);
+      line-height: 1;
+      margin-bottom: 48px;
+    }
+
+    .last-thoughts h2 span { color: var(--red); }
+
+    .last-thoughts-body {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .last-thoughts-body p {
+      font-size: 17px;
+      color: rgba(245,245,243,0.7);
+      line-height: 1.85;
+      margin-bottom: 24px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      padding: 80px 40px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .footer-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1;
+    }
+
+    .footer-title span { color: var(--accent); }
+
+    .footer-info {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 2;
+      text-align: right;
+    }
+
+    .footer-info a { color: var(--accent); text-decoration: none; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── DIVIDER LINE ── */
+    .line-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0 40px;
+    }
+
+    /* ── RED ACCENT STRIPE ── */
+    .stripe {
+      height: 4px;
+      background: var(--red);
+      width: 48px;
+      margin-bottom: 24px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 20px 60px; }
+      .who { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
+      .who-img { aspect-ratio: 4/3; }
+      .contents { padding: 60px 20px; }
+      .contents-grid { grid-template-columns: 1fr 1fr; }
+      .section-header { padding: 40px 20px 24px; }
+      .project { padding: 0 20px 60px; }
+      .project-two-col { grid-template-columns: 1fr; gap: 24px; }
+      .highlight { padding: 60px 20px; }
+      .highlight-two-col { grid-template-columns: 1fr; gap: 32px; }
+      .project-gallery.cols-4 { grid-template-columns: 1fr 1fr; }
+      .project-gallery.cols-3 { grid-template-columns: 1fr 1fr; }
+      .last-thoughts { padding: 60px 20px; }
+      footer { padding: 60px 20px 40px; }
+      .footer-main { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .footer-info { text-align: left; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .line-divider { margin: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-name">PAOLO PIRIA</span>
+    <ul class="nav-links">
+      <li><a href="#who">About</a></li>
+      <li><a href="#graphic">Graphic</a></li>
+      <li><a href="#uiux">UI/UX</a></li>
+      <li><a href="#packaging">Packaging</a></li>
+      <li><a href="#type">Type</a></li>
+      <li><a href="#3d">3D</a></li>
+      <li><a href="#personal">Personal</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-year">2026</div>
+    <h1 class="hero-title">PORT<span>F</span>OLIO</h1>
+    <div class="hero-sub">
+      <p>Paolo Piria — Designer specializing in UI/UX, Graphic Design, and Brand Identity. Based in Perugia, Italy.</p>
+      <div class="hero-contacts">
+        <a href="mailto:paolopiria2311@gmail.com">paolopiria2311@gmail.com</a><br>
+        <a href="https://instagram.com/pablosdesigns_" target="_blank">@pablosdesigns_</a>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- WHO AM I -->
+  <section class="who" id="who">
+    <div class="who-img">
+      <img src="images/foto_paolo.jpg" alt="Paolo Piria" />
+    </div>
+    <div class="who-text">
+      <div class="stripe"></div>
+      <h2><span>WHO</span> AM I</h2>
+      <p>Hello there! My name is Paolo, and I have recently completed my academic journey at NID — Nuovo Istituto Design, based in Perugia.</p>
+      <p>During these years, I learned how to develop an idea starting from research, concept development, and context analysis, always aiming to create each project into a coherent working visual system. I had the opportunity to work on proper brands and companies, both individually and especially in groups, improving my ability to collaborate and adapt my design approach.</p>
+      <p>At the moment, my main areas of interest are UI/UX design and AI tools, two fields that allow me to combine creativity, digital experiences, and new ways of approaching the design process.</p>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="contents">
+    <h2>CONTENTS</h2>
+    <div class="contents-grid">
+      <div class="contents-item">
+        <div class="contents-num">01</div>
+        <div class="contents-label">GRAPHIC DESIGN</div>
+      </div>
+      <div class="contents-item">
+        <div class="contents-num">02</div>
+        <div class="contents-label">UI/UX DESIGN</div>
+      </div>
+      <div class="contents-item">
+        <div class="contents-num">03</div>
+        <div class="contents-label">PACKAGING DESIGN</div>
+      </div>
+      <div class="contents-item">
+        <div class="contents-num">04</div>
+        <div class="contents-label">TYPOGRAPHY &amp; ILLUSTRATION</div>
+      </div>
+      <div class="contents-item">
+        <div class="contents-num">05</div>
+        <div class="contents-label">3D DESIGN</div>
+      </div>
+      <div class="contents-item">
+        <div class="contents-num">06</div>
+        <div class="contents-label">PERSONAL WORK</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 01 GRAPHIC DESIGN ══ -->
+  <div class="section-header" id="graphic">
+    <span class="section-num">01</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">GRAPHIC DESIGN</span>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Featured Project</div>
+    <h3>SOGLIE / THRESHOLDS</h3>
+    <div class="project-two-col">
+      <div>
+        <p>Biggest project of my year was SOGLIE / THRESHOLDS — my first public exhibition experience, developed together with my university colleagues during the Graphic Design III course at NID — Nuovo Istituto Design in Perugia, under the creative direction of Cristiano Bottino.</p>
+        <p>The project explores the concept of boundaries, understood as a space of relationship and transition between the individual and the community. The Biblioteca degli Arconi is the generating principle of the entire exhibition.</p>
+      </div>
+      <div>
+        <p><strong style="color:var(--accent)">My theme: PROXIMITY &amp; DISTANCE</strong></p>
+        <p>Within the shared space, each individual emits their own energy, made of presence, gestures, words, and identity. These signals intertwine with those of others, creating connections, frictions, and temporary balances.</p>
+        <p>Seven groups for seven interpretations. This exhibition unfolds around the concept of transition.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-img">
+      <img src="images/soglie-01-overview.jpg" alt="Soglie Thresholds Exhibition exterior" />
+    </div>
+    <div class="project-gallery cols-3" style="margin-bottom:4px">
+      <img src="images/soglie-02.jpg" alt="Exhibition detail" class="square" />
+      <img src="images/soglie-03.jpg" alt="Exhibition detail" class="square" />
+      <img src="images/soglie-04.jpg" alt="Exhibition detail" class="square" />
+    </div>
+    <div class="project-gallery cols-3" style="margin-bottom:4px">
+      <img src="images/soglie-06.jpg" alt="Exhibition detail" class="square" />
+      <img src="images/soglie-07.jpg" alt="Exhibition detail" class="square" />
+      <img src="images/soglie-08.jpg" alt="Exhibition detail" class="square" />
+    </div>
+    <div class="project-gallery cols-2">
+      <img src="images/soglie-05.jpg" alt="Exhibition wide detail" class="wide" />
+      <img src="images/soglie-09.jpg" alt="Exhibition entrance" class="wide" />
+    </div>
+  </div>
+
+  <!-- ══ 02 UI/UX DESIGN ══ -->
+  <div class="section-header" id="uiux">
+    <span class="section-num">02</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">UI/UX DESIGN</span>
+  </div>
+
+  <!-- myNID -->
+  <div class="project">
+    <div class="project-tag">App Design</div>
+    <h3>APP myNID</h3>
+    <div class="project-two-col">
+      <div>
+        <p>The myNID app was studied, designed, and structured according to the needs of each student for each course, each teacher and their subjects, as well as the administration office, with the goal of making the experience fast and efficient.</p>
+        <p>During the development of the app, we based our work on the existing website where these information were originally available. We also created and shared a questionnaire with several students, teachers, and members of the NID staff, in order to understand their needs, pros and cons.</p>
+      </div>
+      <div>
+        <img src="images/mynid-01-screens.jpg" alt="myNID app screens" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- NDA Website -->
+  <div class="highlight">
+    <div class="label">Website Design</div>
+    <h3>NDA WEBSITE</h3>
+    <div class="highlight-two-col">
+      <div>
+        <p>The NDA (NID Design Award) website, is a hypothetical website designed to present the event in a clear, accessible, and immediate way.</p>
+        <p>The site allows users to discover the overall identity of the event, the winners from previous editions, the participants, the guests, and the different award categories, including "Proiecto" and "Career" which are nowadays a tradition for the NDA.</p>
+        <p>The website was developed on Webflow with a simple but precise design goal: to create a fluid, readable, and intuitive experience.</p>
+      </div>
+      <div>
+        <img src="images/nda-01-website.jpg" alt="NDA Website" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNYX -->
+  <div class="project" style="padding-top:80px;">
+    <div class="project-tag">Final Year Project — App Design</div>
+    <h3>JOURNYX</h3>
+    <div class="project-two-col">
+      <div>
+        <p>JOURNYX is an app I created designed to offer one of the most accurate and authentic review systems ever, allowing each user to review games in a personal and meaningful way.</p>
+        <p>The app is not limited to reviews — I also implemented a system that allows users to track their progress within each game, turning JOURNYX into a true gaming diary.</p>
+        <p>The app includes several unique features, but the most relevant one is the possibility to request help from other users, turning the app into a collaborative space based on shared gaming experiences.</p>
+      </div>
+      <div>
+        <img src="images/journyx-01-icon.jpg" alt="JOURNYX app icon" style="width:40%;display:block;margin:0 auto 24px;" />
+        <img src="images/journyx-02-iphone.jpg" alt="JOURNYX on iPhone" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Visual Identity</div>
+    <h3>JOURNYX — BRAND</h3>
+    <div class="project-two-col">
+      <div>
+        <p>The visual identity of JOURNYX was studied and created by taking inspiration from existing gaming platforms and apps, especially in terms of colors, typography, and tone of voice.</p>
+        <p>The most personal part of the project was the creation of the name. "JOURNYX" comes from the word "journey", later transformed into "journy". The "X" has a double meaning: on one hand, it recalls the "X" on a pirate map, a symbol of a goal or destination to reach; on the other hand, it refers to the "X" button, a recurring and recognizable element in the world of video games.</p>
+      </div>
+      <div>
+        <img src="images/journyx-03-brand.jpg" alt="JOURNYX brand identity" style="width:100%;display:block;background:white;padding:20px;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">App Screens</div>
+    <h3>JOURNYX — SCREENS</h3>
+    <div class="project-gallery cols-4" style="margin-bottom:4px;">
+      <img src="images/journyx-04-homepage.jpg" alt="Home page" class="tall" />
+      <img src="images/journyx-05-game.jpg" alt="Game page" class="tall" />
+      <img src="images/journyx-06-profile.jpg" alt="Profile progress" class="tall" />
+      <img src="images/journyx-07-catalog.jpg" alt="Catalog" class="tall" />
+    </div>
+    <div class="project-gallery cols-2">
+      <img src="images/journyx-04-features.jpg" alt="Activity feed" class="tall" />
+      <img src="images/journyx-05-features.jpg" alt="Help chat between users" class="tall" />
+    </div>
+  </div>
+
+  <!-- ══ 03 PACKAGING ══ -->
+  <div class="section-header" id="packaging">
+    <span class="section-num">03</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">PACKAGING DESIGN</span>
+  </div>
+
+  <div class="project">
+    <p style="color:rgba(245,245,243,0.6);font-size:14px;line-height:1.85;margin-bottom:48px;max-width:700px;">This year, I had my first approach to the world of packaging design, where I learned about different types of structures, packaging systems, and the main rules behind packaging and product presentation.</p>
+
+    <div class="project-tag">Packaging Contest — Vecchio Amaro del Capo</div>
+    <h3>AMARO DEL CAPO: EDIZIONE FREDDO ASSOLUTO</h3>
+    <div class="project-two-col">
+      <div>
+        <p>The goal for the contest of the notorious Italian liquor brand Vecchio Amaro del Capo was to create a unique packaging with an object thought for social moments.</p>
+        <p>My proposal was Amaro del Capo: Edizione Freddo Assoluto, a packaging that included a custom branded ice tray, designed to create a distinctive drinking experience full of personality and style.</p>
+        <p>The box was designed using a color palette that reflects the contrast between the warmth of the liquor and the coldness of the serving ritual.</p>
+      </div>
+      <div>
+        <img src="images/icetray-01-render.jpg" alt="Amaro del Capo packaging with ice tray" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Label Redesign</div>
+    <h3>URBANI TARTUFI</h3>
+    <div class="project-two-col">
+      <div>
+        <p>A small project I made for the Italian brand Urbani Tartufi: I redesigned the labels for one of their truffle oil bottles, giving them a more organized, elegant, clean, and modern visual identity.</p>
+        <p>The aim of the project was to improve the overall readability and hierarchy of the label, while enhancing the premium character of the product.</p>
+        <p>This work later developed into a second project, where I recreated the product through a 3D render, focusing on its presentation and visual impact.</p>
+      </div>
+      <div>
+        <div class="project-gallery cols-3" style="margin-bottom:4px;">
+          <img src="images/urbani-01-oldlabel.jpg" alt="Old label" class="portrait" />
+          <img src="images/urbani-02-newlabel.jpg" alt="New label front" class="portrait" />
+          <img src="images/urbani-04-render.jpg" alt="Bottle render" class="portrait" />
+        </div>
+        <img src="images/urbani-03-newlabel.jpg" alt="New label unfolded" style="width:100%;display:block;margin-top:4px;background:white;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="label">Brand &amp; Packaging from Scratch</div>
+    <h3>VENENO SAUCE</h3>
+    <div class="highlight-two-col">
+      <div>
+        <p>VENENO Sauce is a branding and packaging project developed from scratch around the concept of a habanero hot sauce. The name "VENENO", comes from Spanish meaning "poison", chosen to express the product's strong, spicy, and intense personality.</p>
+        <p>The project included the creation of the brand identity, label design, bottle presentation, color palette, and packaging system. The bold red tones, sharp visual elements, and a clean structure aim to communicate energy, heat, and a distinctive premium character.</p>
+      </div>
+      <div>
+        <img src="images/veneno-01-bottle.jpg" alt="Veneno Sauce" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 04 TYPOGRAPHY ══ -->
+  <div class="section-header" id="type">
+    <span class="section-num">04</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">TYPOGRAPHY &amp; ILLUSTRATION</span>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Contest — NID x Dolly Noire</div>
+    <h3>NID X DOLLY NOIRE</h3>
+    <div class="project-two-col">
+      <div>
+        <p>This year I learned how to properly create, draw illustrations and lettering. I used to avoid hand drawings because I thought it was hard and I lacked skill, but I had a chance to learn and revalue myself with participating in a contest with NID for Dolly Noire.</p>
+        <p>The goal of the contest NID x Dolly Noire was to create 2 proposals from scratch — some hand drawn illustrations with a unique typography.</p>
+      </div>
+      <div>
+        <img src="images/dollynoire-02.jpg" alt="Dolly Noire hand drawn sketch" style="width:100%;display:block;background:white;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Proposal 01 — DOLLY NOIRE</div>
+    <div class="project-gallery cols-3" style="margin-bottom:4px;">
+      <img src="images/dollynoire-04.jpg" alt="Dolly Noire illustration cream" class="square" style="background:white;" />
+      <img src="images/dollynoire-05.jpg" alt="Dolly Noire illustration black" class="square" />
+      <img src="images/dollynoire-06.jpg" alt="Dolly Noire on t-shirt" class="square" />
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-tag">Proposal 02 — DLYNR</div>
+    <div class="project-gallery cols-3">
+      <img src="images/dollynoire-01.jpg" alt="DLYNR hand drawn sketch" class="square" style="background:white;" />
+      <img src="images/dollynoire-07.jpg" alt="DLYNR illustration white" class="square" style="background:white;" />
+      <img src="images/dollynoire-08.jpg" alt="DLYNR illustration black" class="square" />
+    </div>
+    <div class="project-gallery cols-1" style="margin-top:4px;">
+      <img src="images/dollynoire-03.jpg" alt="DLYNR on t-shirt" style="width:100%;display:block;" />
+    </div>
+  </div>
+
+  <!-- ══ 05 3D RENDER ══ -->
+  <div class="section-header" id="3d">
+    <span class="section-num">05</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">3D RENDER</span>
+  </div>
+
+  <div class="project">
+    <p style="color:rgba(245,245,243,0.6);font-size:14px;line-height:1.85;margin-bottom:48px;max-width:700px;">This year, I had the opportunity to learn how to use 3D modeling and rendering softwares, opening a new door to a field I had not explored before. Through this process, I learned how to create 3D renders and prepare models for 3D printing, gaining my first practical results.</p>
+
+    <div class="project-tag">3D Print &amp; Render</div>
+    <h3>AMARO DEL CAPO ICE TRAY</h3>
+    <div class="project-two-col">
+      <div>
+        <p>For this project, I had to learn not only how to use 3D rendering software correctly, but also how to proportion and scale the model in order to make the final product efficient and functional within the packaging system, then allowing me to properly 3D print it.</p>
+      </div>
+      <div>
+        <img src="images/icetray-01-render.jpg" alt="Ice tray 3D render" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <div class="label">3D Product Render</div>
+    <h3>URBANI TARTUFI RENDER</h3>
+    <div class="highlight-two-col">
+      <div>
+        <p>For the project developed for Urbani Tartufi, I decided to apply my 3D rendering skills in order to recreate the product in the most realistic way possible. I worked with materials, tools, lighting, and environments to achieve a highly realistic result, designed to present the product to a potential client in a clear and professional way.</p>
+      </div>
+      <div>
+        <div class="project-gallery cols-2">
+          <img src="images/urbani-05-render.jpg" alt="Urbani Tartufi 3D render front" />
+          <img src="images/urbanirender-01.jpg" alt="Urbani Tartufi 3D render angle" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 PERSONAL WORK ══ -->
+  <div class="section-header" id="personal">
+    <span class="section-num">06</span>
+    <span class="section-slash">/</span>
+    <span class="section-title">PERSONAL WORK</span>
+  </div>
+
+  <div class="project">
+    <p style="color:rgba(245,245,243,0.6);font-size:14px;line-height:1.85;margin-bottom:48px;max-width:700px;">In my free time, I like to experiment with different design programs and software, including AI-based tools. This gives me the opportunity to explore new visual directions, express personal ideas, and create some of the visions I have in mind. Most of these projects are small experiments — posters, typography, visual compositions — but I approach them with the same dedication as my main projects.</p>
+
+    <div class="project-gallery cols-4">
+      <img src="images/personal-01.jpg" alt="Esdeekid poster" class="portrait" />
+      <img src="images/personal-02.jpg" alt="You Grow You Fold poster" class="portrait" />
+      <img src="images/personal-03.jpg" alt="Scream poster" class="portrait" />
+      <img src="images/personal-04.jpg" alt="Echoes event poster" class="portrait" />
+    </div>
+  </div>
+
+  <!-- LAST THOUGHTS -->
+  <section class="last-thoughts">
+    <h2><span>MY</span> LAST THOUGHTS</h2>
+    <div class="last-thoughts-body">
+      <p>Over the past few years, I feel that I have grown much closer to the creative world. Looking towards the future, I can see myself working in the field of app and website development, while continuing to learn and use artificial intelligence in the most effective way possible.</p>
+      <p>I want to keep exploring new tools and methods that can improve my design process, combining creativity, digital experiences, and technology in a more conscious and professional way.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div class="footer-title"><span>THANKS</span> FOR<br>STICKING BY</div>
+      <div class="footer-info">
+        PAOLO PIRIA — 2026<br>
+        <a href="mailto:paolopiria2311@gmail.com">paolopiria2311@gmail.com</a><br>
+        <a href="https://instagram.com/pablosdesigns_" target="_blank">@pablosdesigns_</a><br>
+        <br>
+        Some of my works will be posted<br>on my social media account.
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>PAOLO PIRIA PORTFOLIO</span>
+      <span>DESIGNED IN FIGMA — BUILT IN HTML/CSS</span>
+    </div>
+  </footer>
+
+</body>
+</html>
